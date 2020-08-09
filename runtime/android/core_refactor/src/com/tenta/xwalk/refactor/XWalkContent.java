@@ -27,7 +27,7 @@ import android.view.inputmethod.InputConnection;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.widget.FrameLayout;
-import com.tenta.metafs.MetaError;
+//import com.tenta.metafs.MetaError;
 import com.tenta.xwalk.refactor.XWalkContentsClient.XWalkWebResourceRequest;
 
 import org.chromium.base.Callback;
@@ -250,7 +250,7 @@ class XWalkContent implements XWalkPreferences.KeyValueChangeListener {
         if ( callback == null )
             return;
         if (mNativeContent == 0 ) {
-            callback.onFinishGetBitmap(null, MetaError.INVALID_POINTER);
+            callback.onFinishGetBitmap(null, 0);
             return;
         }
         
@@ -1107,7 +1107,7 @@ class XWalkContent implements XWalkPreferences.KeyValueChangeListener {
      */
     public int saveHistory(final String id, final String encKey) {
         if (mNativeContent == 0) {
-            return metaFsError = MetaError.INVALID_POINTER; // ERR_INVALID_POINTER
+            //return metaFsError = MetaError.INVALID_POINTER; // ERR_INVALID_POINTER
         }
 
         int result = nativeSaveHistory(mNativeContent, id, encKey);
@@ -1123,13 +1123,13 @@ class XWalkContent implements XWalkPreferences.KeyValueChangeListener {
      */
     public int restoreHistory(final String id, final String encKey) {
         if (mNativeContent == 0) {
-            return metaFsError = MetaError.INVALID_POINTER; // ERR_INVALID_POINTER
+           // return metaFsError = MetaError.INVALID_POINTER; // ERR_INVALID_POINTER
         }
 
         int result = nativeRestoreHistory(mNativeContent, id, encKey);
-        if (result == MetaError.FS_OK) {
-            mContentsClientBridge.onTitleChanged(mWebContents.getTitle(), true);
-        }
+        //if (result == MetaError.FS_OK) {
+       //     mContentsClientBridge.onTitleChanged(mWebContents.getTitle(), true);
+       // }
         return metaFsError = result;
     }
 
@@ -1145,14 +1145,14 @@ class XWalkContent implements XWalkPreferences.KeyValueChangeListener {
                               final String encKey) {
 
         if (mNativeContent == 0) {
-            return metaFsError = MetaError.INVALID_POINTER;
+           // return metaFsError = MetaError.INVALID_POINTER;
         }
 
         int result = nativeSaveOldHistory(mNativeContent, state, id, encKey);
 
-        if (metaFsError == MetaError.FS_OK) {
+        //if (metaFsError == MetaError.FS_OK) {
             mContentsClientBridge.onTitleChanged(mWebContents.getTitle(), true);
-        }
+       // }
 
         return metaFsError = result;
     }
@@ -1166,7 +1166,7 @@ class XWalkContent implements XWalkPreferences.KeyValueChangeListener {
      */
     public int nukeHistory(final String id, final String encKey) {
         if (mNativeContent == 0) {
-            return metaFsError = MetaError.INVALID_POINTER;
+           // return metaFsError = MetaError.INVALID_POINTER;
         }
 
         int result = nativeNukeHistory(mNativeContent, id, encKey);

@@ -44,8 +44,9 @@
 #include "xwalk/runtime/browser/xwalk_browser_main_parts_android.h"
 #include "xwalk/runtime/common/xwalk_switches.h"
 
-#include "meta_logging.h"
+
 #if defined(TENTA_CHROMIUM_BUILD)
+#include "meta_logging.h"
 #include "tenta_cookie_store.h"
 #endif
 
@@ -243,6 +244,8 @@ class CookieManager {
   void ResetAsyncHelper(base::WaitableEvent* completion);
   void ResetCookiesRemoved(base::WaitableEvent* completion, uint32_t num_deleted);
 #endif
+  void ResetAsyncHelper(base::WaitableEvent* completion);
+  void ResetCookiesRemoved(base::WaitableEvent* completion, uint32_t num_deleted);
 
 // This protects the following two bools, as they're used on multiple threads.
   base::Lock accept_file_scheme_cookies_lock_;
@@ -287,7 +290,7 @@ CookieManager::CookieManager()
   cookie_store_task_runner_ = cookie_store_client_thread_.task_runner();
 
   cookie_store_backend_thread_.Start();
-  TENTA_LOG_COOKIE(INFO) << __func__ << " thread_id=" << cookie_store_client_thread_.GetThreadId();
+//  TENTA_LOG_COOKIE(INFO) << __func__ << " thread_id=" << cookie_store_client_thread_.GetThreadId();
 }
 
 CookieManager::~CookieManager() {
@@ -302,7 +305,7 @@ void CookieManager::ExecCookieTask(const CookieTask& task, const bool wait_for_c
   bool executed = cookie_store_task_runner_->PostTask(FROM_HERE,
   base::Bind(task, wait_for_completion ? &completion : nullptr));
 
-  TENTA_LOG_COOKIE(INFO) << __func__ << " executed=" << executed;
+//  TENTA_LOG_COOKIE(INFO) << __func__ << " executed=" << executed;
 
   if (executed && wait_for_completion) {
     ScopedAllowWaitForLegacyWebViewApi wait;
@@ -329,7 +332,7 @@ net::CookieStore* CookieManager::GetCookieStore() {
 
     FilePath cookie_store_path = user_data_dir.Append(FILE_PATH_LITERAL("Cookies"));
 
-    TENTA_LOG_COOKIE(INFO) << "!!! " << __func__ << " cookie_store_path=" << cookie_store_path.value();
+ //   TENTA_LOG_COOKIE(INFO) << "!!! " << __func__ << " cookie_store_path=" << cookie_store_path.value();
     content::CookieStoreConfig cookie_config(cookie_store_path,
                                              true /* restore_old_session_cookies */,
                                              true /* persist_session_cookies */,
@@ -357,7 +360,7 @@ net::CookieStore* CookieManager::GetCookieStore() {
 #if defined(TENTA_CHROMIUM_BUILD)
     cookie_store_ = tenta::ext::CreateCookieStore(cookie_config, _tenta_store);
 #else
-    cookie_store_ = content::CreateCookieStore(cookie_config);
+    cookie_store_ = content::CreateCookieStore(cookie_config, nullptr);
 #endif
   }
 
@@ -373,7 +376,7 @@ bool CookieManager::AcceptCookie() {
 }
 
 void CookieManager::SetCookie(const GURL& host, const std::string& cookie_value) {
-  TENTA_LOG_COOKIE(INFO) << __func__ << " host=" << host << " cookie=" << cookie_value;
+//  TENTA_LOG_COOKIE(INFO) << __func__ << " host=" << host << " cookie=" << cookie_value;
 
   ExecCookieTask(base::Bind(&CookieManager::SetCookieAsyncHelper, base::Unretained(this), host, cookie_value),
   false);
@@ -391,7 +394,7 @@ void CookieManager::SetCookieAsyncHelper(const GURL& host, const std::string& va
 void CookieManager::SetCookieCompleted(net::CanonicalCookie::CookieInclusionStatus status) {
 // The CookieManager API does not return a value for SetCookie,
 // so we don't need to propagate the |success| value back to the caller.
-  TENTA_LOG_COOKIE(INFO) << __func__ << " status=" << (int)status;
+//  TENTA_LOG_COOKIE(INFO) << __func__ << " status=" << (int)status;
 }
 
 std::string CookieManager::GetCookie(const GURL& host) {
@@ -435,14 +438,14 @@ void CookieManager::RemoveAllCookie() {
 // across threads.
 void CookieManager::RemoveAllCookieAsyncHelper(base::WaitableEvent* completion) {
   DCHECK(!completion);
-  TENTA_LOG_COOKIE(INFO) << __func__;
+//  TENTA_LOG_COOKIE(INFO) << __func__;
 
   GetCookieStore()->DeleteAllAsync(
       base::BindOnce(&CookieManager::RemoveCookiesCompleted, base::Unretained(this), completion));
 }
 
 void CookieManager::RemoveCookiesCompleted(base::WaitableEvent* completion, uint32_t num_deleted) {
-  TENTA_LOG_COOKIE(INFO) << __func__ << " deleted=" << num_deleted;
+//  TENTA_LOG_COOKIE(INFO) << __func__ << " deleted=" << num_deleted;
 // The CookieManager API does not return a value for removeSessionCookie or
 // removeAllCookie, so we don't need to propagate the |num_deleted| value
 // back to the caller.
@@ -645,7 +648,7 @@ void CookieManager::RestoreCookiesAsyncHelper(CookieByteArray * cb, base::Waitab
 }
 
 void CookieManager::RestoreCookieCallback(net::CanonicalCookie::CookieInclusionStatus status) {
-  TENTA_LOG_COOKIE(INFO) << "!!! " << __func__ << " status=" << (int)status;
+//  TENTA_LOG_COOKIE(INFO) << "!!! " << __func__ << " status=" << (int)status;
 }
 
 bool CookieManager::HasCookies() {
@@ -806,20 +809,21 @@ void CookieManager::Reset() {
                  true /*wait 'till finish*/);
 #endif
 }
-
-void CookieManager::ResetAsyncHelper(base::WaitableEvent* completion) {
-  GetCookieStore();
-  _tenta_store->ZoneSwitching(true);
-  GetCookieStore()->DeleteAllAsync(
-      base::BindOnce(&CookieManager::ResetCookiesRemoved, base::Unretained(this), completion));
-}
-
 void CookieManager::ResetCookiesRemoved(base::WaitableEvent* completion, uint32_t num_deleted) {
-  _tenta_store->Reset();
+//  _tenta_store->Reset();
   if ( completion != nullptr ) {
     completion->Signal();
   }
 }
+
+void CookieManager::ResetAsyncHelper(base::WaitableEvent* completion) {
+  GetCookieStore();
+ // _tenta_store->ZoneSwitching(true);
+  GetCookieStore()->DeleteAllAsync(
+      base::BindOnce(&CookieManager::ResetCookiesRemoved, base::Unretained(this), completion));
+}
+
+
 
 /*********** Java/Jni ****************/
 static void JNI_XWalkCookieManager_SetAcceptCookie(JNIEnv* env, const JavaParamRef<jobject>& obj,

@@ -91,14 +91,14 @@ namespace {
 bool g_check_cleartext_permitted = false; // TODO(iotto): Make configurable
 
 
-const char kProxyServerSwitch[] = "proxy-server";
-const char kProxyBypassListSwitch[] = "proxy-bypass-list";
+//const char kProxyServerSwitch[] = "proxy-server";
+//const char kProxyBypassListSwitch[] = "proxy-bypass-list";
 
 
 // Field trial for network quality estimator. Seeds RTT and downstream
 // throughput observations with values that correspond to the connection type
 // determined by the operating system.
-const char kNetworkQualityEstimatorFieldTrialName[] = "NetworkQualityEstimator";
+//const char kNetworkQualityEstimatorFieldTrialName[] = "NetworkQualityEstimator";
 
 // TODO(rakuco): should Crosswalk's release cycle ever align with Chromium's,
 // we should use Chromium's Certificate Transparency policy and stop ignoring
@@ -277,7 +277,7 @@ net::URLRequestContext* RuntimeURLRequestContextGetter::GetURLRequestContext() {
 
     std::unique_ptr<net::MappedHostResolver> host_resolver(
         new net::MappedHostResolver(
-            net::HostResolver::CreateDefaultResolver(nullptr)));
+            net::HostResolver::CreateResolver(nullptr)));
 #endif
 
     storage_->set_cert_verifier(net::CertVerifier::CreateDefault(nullptr/*cert_net_fetcher*/));
