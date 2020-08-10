@@ -28,9 +28,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.tenta.xwalk.refactor.XWalkExternalExtensionManager;
-import com.tenta.xwalk.refactor.XWalkNativeExtensionLoader;
-import com.tenta.xwalk.refactor.XWalkView;
+import com.pakdata.xwalk.refactor.XWalkExternalExtensionManager;
+import com.pakdata.xwalk.refactor.XWalkNativeExtensionLoader;
+import com.pakdata.xwalk.refactor.XWalkView;
 
 /**
  * This internal class acts as a manager to manage external extensions.

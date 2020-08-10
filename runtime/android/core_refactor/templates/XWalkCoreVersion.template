@@ -1,4 +1,4 @@
-package com.tenta.xwalk.refactor;
+package com.pakdata.xwalk.refactor;
 
 class XWalkCoreVersion {
     public static final int API_VERSION = XWALK_API_VERSION;

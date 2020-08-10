@@ -31,7 +31,7 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.util.Arrays;
 
-import com.tenta.xwalk.refactor.XWalkAppVersion;
+import com.pakdata.xwalk.refactor.XWalkAppVersion;
 
 /**
  * XWalkLibraryLoader is a low level inteface to schedule decompressing, downloading, activating
