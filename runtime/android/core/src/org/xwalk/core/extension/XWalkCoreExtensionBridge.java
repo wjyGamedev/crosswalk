@@ -4,7 +4,7 @@
 
 package org.xwalk.core.extension;
 
-import com.pakdata.xwalk.refactor.XWalkExtension;
+import com.tenta.xwalk.refactor.XWalkExtension;
 
 import android.content.Context;
 import android.content.Intent;

@@ -424,7 +424,7 @@ base::FilePath XWalkBrowserContext::GetCacheDir() {
     NOTREACHED() << "Failed to get app cache directory for Android WebView";
   }
   cache_path =
-      cache_path.Append(FILE_PATH_LITERAL("com.pakdata.xwalk"));
+      cache_path.Append(FILE_PATH_LITERAL("com.tenta.xwalk"));
   return cache_path;
 }
 

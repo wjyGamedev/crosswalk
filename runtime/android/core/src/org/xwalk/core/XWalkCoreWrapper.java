@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import com.pakdata.xwalk.refactor.ReflectField;
-import com.pakdata.xwalk.refactor.ReflectMethod;
-import com.pakdata.xwalk.refactor.XWalkAppVersion;
-import com.pakdata.xwalk.refactor.XWalkCoreBridge;
-import com.pakdata.xwalk.refactor.XWalkViewDatabase;
-import com.pakdata.xwalk.refactor.XWalkViewDelegate;
+import com.tenta.xwalk.refactor.ReflectField;
+import com.tenta.xwalk.refactor.ReflectMethod;
+import com.tenta.xwalk.refactor.XWalkAppVersion;
+import com.tenta.xwalk.refactor.XWalkCoreBridge;
+import com.tenta.xwalk.refactor.XWalkViewDatabase;
+import com.tenta.xwalk.refactor.XWalkViewDelegate;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

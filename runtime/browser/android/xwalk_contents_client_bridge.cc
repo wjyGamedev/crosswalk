@@ -401,7 +401,7 @@ bool XWalkContentsClientBridge::RewriteUrlIfNeeded(const std::string& url,
   using namespace base::android;
 
   ScopedJavaLocalRef<jclass> jcls = base::android::GetClass(
-      env, "com/pakdata/xwalk/refactor/RewriteUrlValue");
+      env, "com/tenta/xwalk/refactor/RewriteUrlValue");
 
   jfieldID field_url = env->GetFieldID(jcls.obj(), "url", "Ljava/lang/String;");
   jfieldID field_tr_type = env->GetFieldID(jcls.obj(), "transitionType", "I");
