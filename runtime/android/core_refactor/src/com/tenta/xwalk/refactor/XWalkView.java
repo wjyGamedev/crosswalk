@@ -55,7 +55,7 @@ import com.tenta.xwalk.refactor.XWalkGetBitmapCallback;
 import com.tenta.xwalk.refactor.XWalkHitTestResult;
 import com.tenta.xwalk.refactor.XWalkSettings;
 
-//import com.tenta.metafs.MetaError;
+import com.tenta.metafs.MetaError;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -1045,7 +1045,7 @@ public class XWalkView extends android.widget.FrameLayout {
 //    @XWalkAPI
     public int saveHistory(final String id, final String encKey) {
         if (mContent == null) {
-            //return MetaError.INVALID_POINTER;
+            return MetaError.INVALID_POINTER;
         }
 
         return mContent.saveHistory(id, encKey);
@@ -1061,7 +1061,7 @@ public class XWalkView extends android.widget.FrameLayout {
 //    @XWalkAPI
     public int restoreHistory(final String id, final String encKey) {
         if (mContent == null) {
-            //return MetaError.INVALID_POINTER;
+            return MetaError.INVALID_POINTER;
         }
 
         return mContent.restoreHistory(id, encKey);
@@ -1075,7 +1075,7 @@ public class XWalkView extends android.widget.FrameLayout {
 //    @XWalkAPI
     public int getMetaFsError() {
         if (mContent == null) {
-            //return MetaError.INVALID_POINTER;
+            return MetaError.INVALID_POINTER;
         }
 
         return mContent.getMetaFsError();
@@ -1093,7 +1093,7 @@ public class XWalkView extends android.widget.FrameLayout {
     public int saveOldHistory(byte[] state, final String id,
             final String encKey) {
         if (mContent == null) {
-            //return MetaError.INVALID_POINTER;
+            return MetaError.INVALID_POINTER;
         }
         
         return mContent.saveOldHistory(state, id, encKey);
@@ -1109,7 +1109,7 @@ public class XWalkView extends android.widget.FrameLayout {
 //    @XWalkAPI
     public int nukeHistory(final String id, final String encKey) {
         if (mContent == null) {
-            //return MetaError.INVALID_POINTER;
+            return MetaError.INVALID_POINTER;
         }
         
         return mContent.nukeHistory(id, encKey);
@@ -1292,7 +1292,7 @@ public class XWalkView extends android.widget.FrameLayout {
     public void captureBitmapWithParams(float scale, Rect srcRect,
             XWalkGetBitmapCallback callback) {
         if (mContent == null) {
-            callback.onFinishGetBitmap(null, 0);
+            callback.onFinishGetBitmap(null, MetaError.INVALID_POINTER);
             return;
         }
         checkThreadSafety();

@@ -190,7 +190,7 @@ class ClientProxy :
   ~ClientProxy() override {
   }
 
-  void DispatchProtocolMessage(content::DevToolsAgentHost* agent_host, const std::string& message) override {
+  void DispatchProtocolMessage(DevToolsAgentHost* agent_host, const std::string& message) override {
     proxy_->DispatchOnClientHost(message);
   }
 
@@ -390,7 +390,7 @@ scoped_refptr<content::DevToolsAgentHost> XWalkDevToolsManagerDelegate::CreateNe
 
 content::DevToolsAgentHost::List XWalkDevToolsManagerDelegate::RemoteDebuggingTargets() {
   // Enumerate existing tabs, including the ones with no WebContents.
-  content::DevToolsAgentHost::List result;
+  DevToolsAgentHost::List result;
 
 #ifdef TENTA_CHROMIUM_BUILD
   std::set<WebContents*> tab_web_contents;

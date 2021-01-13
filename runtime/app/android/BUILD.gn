@@ -33,11 +33,10 @@ shared_library("libxwalkcore") {
       "//xwalk/third_party/tenta/meta_fs",
       "//xwalk/third_party/tenta/crosswalk_extensions",
     ]
-  
-    public_configs = [
-      "//xwalk/third_party/tenta/meta_fs:meta_fs_pub",
-      "//xwalk/third_party/tenta/mimicvpn:mimicvpn_pub"
-    ]
-    public_deps = [ "//xwalk/third_party/tenta/mimicvpn:mimicvpn_src", ]
   }
+  public_configs = [
+    "//xwalk/third_party/tenta/meta_fs:meta_fs_pub",
+    "//xwalk/third_party/tenta/mimicvpn:mimicvpn_pub"
+  ]
+  public_deps = [ "//xwalk/third_party/tenta/mimicvpn:mimicvpn_src", ]
 }

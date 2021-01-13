@@ -104,7 +104,7 @@ std::string* g_locale_list() {
   return locale_list.get();
 }
 
-//const int cBlkSize = 4 * 1024;
+const int cBlkSize = 4 * 1024;
 
 const void* kXWalkContentUserDataKey = &kXWalkContentUserDataKey;
 

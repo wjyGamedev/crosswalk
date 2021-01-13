@@ -293,7 +293,6 @@ generate_jni_registration("xwalk_jni_registration") {
   header_output = "$target_gen_dir/${target_name}.h"
 #todo(iotto)  exception_files = jni_exception_files
   print("ohoooooooooo register natives! out=", header_output)
-  print("ohoooooooooo tenta_chromium_build! out=", tenta_chromium_build)
 }
 
 generate_android_project("xwalk_shared_library") {

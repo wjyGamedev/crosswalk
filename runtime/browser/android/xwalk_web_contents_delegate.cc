@@ -292,7 +292,7 @@ bool XWalkWebContentsDelegate::DidAddMessageToConsole(content::WebContents* sour
 
 bool XWalkWebContentsDelegate::HandleKeyboardEvent(content::WebContents* source,
                                                    const content::NativeWebKeyboardEvent& event) {
-  base::android::ScopedJavaGlobalRef<jobject> key_event = event.os_event;
+  ScopedJavaGlobalRef<jobject> key_event = event.os_event;
   if (!key_event.obj())
     return true;
   JNIEnv* env = AttachCurrentThread();

@@ -15,7 +15,6 @@
 #include "third_party/blink/public/mojom/permissions/permission_status.mojom.h"
 #include "xwalk/runtime/browser/android/find_helper.h"
 #include "xwalk/runtime/browser/android/renderer_host/xwalk_render_view_host_ext.h"
-#include "third_party/skia/include/core/SkBitmap.h"
 
 #ifdef TENTA_CHROMIUM_BUILD
 #include "browser/neterror/tenta_net_error_client.h"
