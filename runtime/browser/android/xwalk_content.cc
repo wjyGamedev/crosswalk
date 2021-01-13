@@ -278,8 +278,8 @@ XWalkContent::XWalkContent(std::unique_ptr<content::WebContents> web_contents)
     : web_contents_(std::move(web_contents)),
       _zone_id(0),
       _tab_id(0) {
-  LOG(ERROR) << "iotto " << __func__ << " FIX AUTOFILL!"; 
- xwalk_autofill_manager_.reset(new XWalkAutofillManager(web_contents_.get()));
+  LOG(ERROR) << "iotto " << __func__ << " FIX AUTOFILL!";
+//  xwalk_autofill_manager_.reset(new XWalkAutofillManager(web_contents_.get()));
   XWalkContentLifecycleNotifier::OnXWalkViewCreated();
 }
 

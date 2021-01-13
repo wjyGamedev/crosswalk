@@ -135,7 +135,7 @@ class XWalkLibraryLoader {
 
     public static boolean isInitializing() {
         return sActiveTask != null &&
-                (sActiveTask instanceof DecompressTask 
+                (sActiveTask instanceof DecompressTask
                         || sActiveTask instanceof ActivateTask);
     }
 
